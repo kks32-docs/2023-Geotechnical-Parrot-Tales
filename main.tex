@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage{graphicx}% Required for inserting images
+\usepackage[dvipsnames]{xcolor}
+\usepackage{geometry}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor   = black %Colour of citations
+}
+\usepackage[utf8]{inputenc}
+\usepackage[
+backend=biber,
+style=authoryear
+]{biblatex}
+\usepackage{cleveref}
+\geometry{a4paper,margin=1 in}
+\addbibresource{ref.bib}
+\title {Geotechnical Parrot Tales (GPT): Application of Large Language Models in geotechnical engineering}
+
+\author{Krishna Kumar}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+The rise of large language models (LLMs) has generated widespread interest due to their ability to answer questions, generate text/code, and summarize. One of the most popular LLM is OpenAI's ChatGPT, released in November 2022. ChatGPT is a probabilistic LLM built on OpenAI's GPT-3.5 (Generative Pretrained Transformers) with a chat user interface to the GPT model. Despite their impressive capabilities, ChatGPT can produce plausible-sounding but false outputs, blurring the line between facts and hallucinations (\cite{bender2021dangers}).
+
+Prompt engineering is creating effective inputs to help LLMs generate the desired output. Prompt engineering is crucial to mitigate these risks and harness the full potential of ChatGPT in geotechnical engineering. Prompt engineering refers to carefully designing input prompts to elicit accurate and valuable responses from LLMs (\cite{petroni2020context}). By developing a deep understanding of ChatGPT's strengths and limitations, engineers can create prompts that effectively guide the model toward generating valuable insights while minimizing the risks of falsehoods and hallucinations.
+
+In this article, we will explore ChatGPT and its applications in geotechnical engineering. We will discuss the challenges and pitfalls associated with these models and highlight the importance of prompt engineering in navigating these challenges to ensure reliable and accurate outcomes.
+
+\section{Demystifying ChatGPT: The technical bits}
+The groundbreaking paper "Attention is All You Need" introduced Transformers (\cite{vaswani2017attention}), the `T` in the GPT models. Unlike previous natural language models, transformers could look at the whole context. Imagine we are reading a book. As you progress through the sentences, you naturally anticipate the next word based on your understanding of language and the context provided by the story. Think of the Transformer as a dedicated reader who has read thousands of books and learned to recognize patterns in how words and sentences are structured. When encountering a new sentence or paragraph, it uses this knowledge to make educated guesses about what word should come next. For example, if the Transformer reads a sentence like "During site investigation, the engineer discovered that the soil has a high degree of...", it would likely predict the next word as something like "saturation" or "compaction," based on its understanding of common phrases and concepts in the geotechnical field. The Transformer model achieves this by utilizing layers of attention mechanisms. These attention mechanisms help the model focus on the most relevant words or phrases in the given context, just like how we might focus on specific details when trying to predict while reading a book.
+
+\Cref{fig:Transformers}a illustrates how ChatGPT might complete the sentence, "The geotechnical engineer discovered that a site with dry collapsible soil in arid Arizona \underline{\hspace{1cm}}." GPT chooses each subsequent word based on probabilities derived from its extensive training corpus and the text generated thus far. This example selects the highest-ranking word at every step, resulting in the response, "... was not suitable for the proposed construction." While this method works well for short responses, it can take longer responses to appear robotic, stiff, and unimaginative. To address this, GPT provides various controls for adjusting word selection. One such control is the temperature setting. With a temperature of 0, GPT always chooses the word with the highest probability (\cref{fig:Transformers}aa). However, by increasing the temperature to 1.0 (ChatGPT uses 0.7), GPT occasionally selects lower-ranked words, producing text that often feels more natural and inventive.~\Cref{fig:Transformers}b demonstrates this: a non-zero temperature setting generates an impossible and inaccurate response "was highly saturated with water" from the same input prompt. A zero temperature means the GPT model will be more consistent (the output will not change regardless of how often you run the same query), but it may still be wrong. Most scientific applications would require a temperature of zero to guarantee consistent results. 
+
+ChatGPT is susceptible to hallucinations, meaning that it can occasionally generate responses that are not based on factual information or are unrelated to the context. These hallucinations can happen even when the temperature parameter is zero. A model's capability refers to its objective or goal, while alignment focuses on the desired behavior of the model compared to its actual training. ChatGPT's goal is to produce human-like text based on input, while its alignment aims to ensure that generated responses meet the expectations and values of its users. Models such as GPT-3 are capable but misaligned, as their training does not always capture higher-level meaning. This creates a noticeable gap between how these models are trained and how we want to use them. ChatGPT employs Reinforcement Learning from Human Feedback to better align with human values and expectations. GPT-3 has 175 billion parameters, while GPT-4~\citep{bubeck2023sparks} is speculated to have 1 trillion parameters to encode all training information. ChatGPT generates plausible-sounding responses using these parameters alone, which leads to hallucinations, limited interpretability, and potentially biased output. Involving humans in the loop can introduce new biases. They may lack the required expertise for specific tasks (ChatGPT trainers may not include experts in Geotechnical Engineering), resulting in less accurate feedback.
+
+ChatGPT can be described as a stochastic parrot because it learns from vast amounts of text data and generates human-like text based on the patterns it identifies. However, due to its training strategies, it may produce inconsistent, biased output or lack deeper understanding, much like a parrot that can mimic human speech but does not fully grasp the meaning behind the words. While ChatGPT is competent, addressing hallucination and alignment issues remains crucial to ensure its outputs align with human values and expectations.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{figs/transformers.png}
+    \caption{GPT text generation using transformers.}
+    \label{fig:transformers}
+\end{figure}
+
+\section{Applications of ChatGPT to Geotechnical Engineering}
+Even with the current advancements in GPT-4, the models will hallucinate, i.e., lie or confidently make things up. Although ChatGPT is widely used to showcase its generative power, like writing emails and reports, we have not explored the innovative use cases of LLMs in engineering.  The best use of ChatGPT is not as an intelligent answering machine but as a reasoning engine or a ``calculator of words.” We will explore advanced ChatGPT use cases that can accelerate geotechnical engineering design and research.
+
+\subsection{Prompt Engineering}
+ChatGPT has a huge potential to accelerate the adoption of data-driven methods and computational modeling in Civil and Geotechnical Engineering. When we provide ChatGPT with a specific request called a ``prompt," it uses its vast knowledge to create a suitable response. However, crafting an effective prompt is crucial, as it guides the GPT in understanding what we want – ``prompt engineering." A well-designed prompt ensures GPT comprehends the task and delivers accurate, efficient, and functional code. Context is vital in prompt engineering for code generation because it helps the ChatGPT to better understand the specific requirements and nuances of the task at hand. Providing sufficient context allows the model to generate accurate and relevant code for the problem we are trying to solve. Without adequate context, ChatGPT might generate code that appears functional but lacks the necessary details to address the issue effectively. 
+
+Consider the prompt:\textit{ \color{orange}`Write a Python code for USCS soil classification.'}  In this case, ChatGPT hallucinates and responds with an incorrect code without including Atterberg’s limit, yet indicating it wrote the code based on ASTM D2487-17 (see~\cref{fig:Soilclass}). The prompt assumes that ChatGPT possesses all the necessary knowledge to accomplish the task. However, users should primarily use ChatGPT as a translator, providing the necessary context and knowledge to accomplish the task. We can provide a context by including ``\textit{Context: }” in the chat prompt and adding the relevant information. For the USCS soil classification, we will treat ChatGPT as a translator from English to Python. 
+
+\noindent
+\color{orange}{\\Prompt: Write a Python code for USCS soil classification using the following conditions and using the A-line equation as 0.73 * (LL - 20).
+\\Context: 
+\\Inputs: \% passing sieve 4 and 200, D10, D30, D60, Liquid limit (LL), and Plastic Limit (PL).
+\\Compute auxiliary variables: Plasticity Index $(PI) = LL - PL$, $Cu = D60/D10$, and $Cc = D30^2/(D10 * D60)$
+\\$<$Showing only Gravel classification for brevity$>$
+
+\begin{enumerate}
+    \item If the percentage passing through the No. 200 sieve (Sieve200) is less than or equal to 50, the soil is coarse-grained: 
+        \begin{enumerate}
+        \item If the percentage of gravel is greater than the percentage of sand, classify the soil as follows: 
+            \begin{enumerate}
+            \item If the percentage passing through the No. 200 sieve is less than 5 and the coefficient of uniformity (Cu) is greater than 4, and the coefficient of curvature (Cc) is strictly between 1 and 3, classify the soil as "GW". 
+            \item If the above conditions are not met, classify the soil as "GP".
+            \end{enumerate}
+        \item If the percentage passing through the No. 200 sieve is greater than 12, classify the soil as follows: 
+            \begin{enumerate}
+            \item If the plasticity index (PI) is below the A-line, classify the soil as "GM".
+            \item If the plasticity index is above the A-line, classify the soil as "GC". 
+            \item If the plasticity index is on the A-line, classify the soil as "GM-GC" (borderline case).
+            \end{enumerate}
+        \item For borderline cases $(5\% \leq \textit{}Sieve200 \leq12\%)$, consider the following classifications:
+            \begin{enumerate}
+            \item If Cu $>4$ and Cc is strictly between 1 and 3, check the plasticity index:  If PI is below the A-line, classify the soil as "GW-GM".  If PI is above the A-line, classify the soil as "GW-GC". If PI is on the A-line, classify the soil as "GW-GM-GC" (borderline case).
+            \item If the conditions above are unmet, check the plasticity index: If PI is below the A-line, classify the soil as "GP-GM". If PI is above the A-line, classify the soil as "GP-GC". If PI is on the A-line, classify the soil as "GP-GM-GC" (borderline case).
+            \end{enumerate}
+        \end{enumerate}
+\end{enumerate}
+}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figs/soil-classification-code.png}
+    \caption{ChatGPT response to write a Python code for soil classification.}
+    \label{fig:Soilclass}
+\end{figure}
+
+\color{black}{
+Similarly, ChatGPT can summarize articles and reports, but it is important to provide a context. For example, a summarization prompt without a context, such as, \textcolor{orange}{\textit{Write a summary of  “Crocker, Kumar, and Cox. (2023) Using explainability to design physics-aware CNNs for solving subsurface inverse problems.” }}only gives a hallucinated summary. ChatGPT does not know the paper, as its knowledge is limited to articles published before September 2021. Even if we ask ChatGPT to summarize a paper published before September 2021, without context, ChatGPT will hallucinate. Accurate summarizing is only possible when the whole paper is provided as context. 
+}
+\subsection{A context-specific search engine}
+This section offers an approach to proving the correct context to LLMs. In the following sections, we will use OpenAI’s GPT-3.5-turbo Application Programming Interface (API) rather than the chat interface for context-specific Q\&As. LLMs are reasoning engines that analyze textual information to extract answers based on context. Unless we provide an appropriate context, GPT will suffer from hallucinations. For example, if we ask GPT, \textit{\textcolor{red}{``What is the XML tag to store plastic limit in DIGGS?”}} we get the following incorrect response: \textcolor{ForestGreen}{``\textless TestType \textgreater Plastic Limit\textless /TestType\textgreater."} However, the XML tag test type is a generic tag GPT invented to store Plastic Limit, although GPT has been trained on this data and is aware of DIGGS.  For GPT to generate answers, we need to provide appropriate context. In this case, we need to identify the appropriate sections of the DIGGS schema and provide it as a context. The number of tokens (words) we can provide as context is limited (32k), and the compute cost is related to the number of tokens. Hence, it is important to find the appropriate context rather than providing the entire knowledge base, which may not be possible in many cases. How can we build a context-specific search engine that uses local knowledge bases to find the correct context for GPT to answer the question? 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{figs/semantic-search.png}
+    \caption{Context-specific semantic search engine using vector database and latent space embedding.
+    \label{fig:semantic-search}
+}
+\end{figure}
+Semantic search aims to understand the intent and contextual meaning of search queries, providing more accurate and relevant results. Figure 3 shows an overview of the semantic search engine architecture. Using OpenAI's text embedding model, we convert the textual knowledge base (e.g., DIGGS schema) into context vectors (see~\cref{fig:semantic-search}). The context vectors of the knowledge base are stored in a fast-accessible vector database like FAISS. When a user enters a search term, we convert the search term to a vector using the same embedding model. We perform a cosine similarity on the vector database to identify the appropriate context. Cosine similarity involves computing the dot product between the search vector and every knowledge vector in the database. OpenAI uses an absolute positional embedding, which means a cosine similarity of 1.0 means the context is an exact match to the search query. We then rank the contexts based on the dot product values (search term vs. knowledge vector). Once we have identified the top five contexts matching the search query, we feed those as a context to GPT API (we use a GPT generation model like \verb|text-davinci-003|) to create a customized answer. This context-specific GPT will guarantee deterministic answers and prevent hallucinations. Using this context-specific GPT, we get the correct answer "The DIGGS XML tag for plastic limit is \textcolor{ForestGreen}{\textless diggs\_geo:waterContent\textgreater}within the parent tag \textcolor{ForestGreen}{\textless diggs\_geo:plasticLimitTrial\textgreater}” We can reuse the search engine to do more complex tasks, such as asking it to generate a DIGGS XML file (see~\cref{fig:digg}). We can also finetune the semantic search engine using supervised learning trained on a list of questions and answers about DIGGS. 
+
+
+\begin{figure}[ht]
+    \begin{minipage}{0.48\textwidth}
+    \textcolor{orange}{Prompt: I have a list of three plastic limit trials: [11.9 \%, 11.7 \%, and 11.4\%]. Autoincrement trial number starting with one. Add a `gml:id` string for each trial. Create the XML file. }
+    \\\\
+    \textcolor{blue}{Response: Each plastic limit trial is represented by a `\textless diggs\_geo:PlasticLimitTrial\textgreater' element inside a `\textless diggs\_geo:plasticLimitTrial\textgreater' element. The `gml:id' attribute is set to ``tr1", ``tr2", and ``tr3" for the three trials, respectively. The `trialNo' element is auto-incremented starting from 1 for each trial, and the `waterContent' element contains the percentage values for the trials. The `isManual' element is set to true for all trials, but you can change it to false if needed.}
+    \end{minipage}%
+    \hspace{0.5cm}%
+    \begin{minipage}[r]{0.45\textwidth}
+    \includegraphics[width = \linewidth]{figs/diggs.png}
+    \end{minipage}
+    \caption{Using GPT to generate DIGGS Schema.}
+    \label{fig:diggs}
+\end{figure}
+
+\subsection{GPT as the unified interface for complex engineering workflows}
+
+GPT will revolutionize and accelerate engineering progress by serving as a unified input interface for complex tasks such as generating a mesh for finite element analysis, monitoring structural health, and analyzing data, all requiring specialized skills. We propose a strategy that combines prompt with a high-level function library, enabling GPT to be the unifying interface to various engineering tasks. Consider the problem of accessing the UCLA Ground Motion Database~\citep{brandenburg2022} and extracting sites with a Vs30 less than 300 m/s. We must know how to construct API requests or SQL queries to extract the information from the database. To avoid learning a new programming paradigm, we can use GPT as the interface and develop a ``plugin" that translates from natural language into an API call. To achieve this, we provide the Ground Motion Database schema as context for GPT, ``teaching" it how to construct API queries. We develop an ``Agent” framework by restricting GPT’s ability to specific actions~\citep{yao2022react}. In this case, we constrain GPT to only three actions: question, reason, or code. In ``\textit{Question}", GPT is allowed to ask a clarifying question, GPT will always provide a ``\textit{reason}” for why it generated a particular code, and finally, the output ``\textit{code}.” We also restrict the output code to the pre-defined schema and query format. We provide an example of the output code so that GPT could follow a similar output style. Finally, we force GPT not to hallucinate: \textcolor{orange}{If you cannot make a query based on the above context, say, ``I do not know." }The following prompt describes how to construct an Agent for building APIs for the UCLA GroundMotion database:\\\\
+\textcolor{orange}{Prompt: ``Imagine you are helping me interact with a GroundMotion database through an API. At any given point in time, you have the following abilities. You are also required to output code for some of the requests. Do not make up any table names or field names. If you cannot make a query based on the above context, say, ``I do not know.”\\\\
+Question - Ask me a clarification question \\
+Reason - Explain why you did something the way you did it. \\
+Code - Output a code command that achieves the desired goal.\\
+\textless GroundMotion Database Schema\textgreater\\
+Query format: URL = \url{base_url/service?query_string} \\
+\textless Description of URL components\textgreater\\
+Example Query: The query below returns 500 entries for the event, motion, event, station, component, and site tables sites with PGA between 0.1 and 0.2g. 
+\url{https://www.uclageo.com/gm_database/api/index.php/flatfile?format=html&limit=500&tables=event,motion,station,component,event_type,site&PGA=0.1-0.2&sortby=PGA&order=DESC}}
+\\
+With this prompt, we have primed GPT as an API generator to access the ground motion database. We can now use GPT to construct API requests:
+\\\\
+\textit{\textcolor{orange}{Prompt: Create an API request to filter all sites by vs30 between 0 to 100 m/s.
+}}
+\\
+\textcolor{blue}{\textit{Response}: Here is an example API request to filter all sites by VS30 between 0 and 100: \url{https://www.uclageo.com/gm_database/api/index.php/flatfile?format=html&limit=1000&tables=site&vs30=0-100}. In this request, the tables parameter is set to the site to retrieve up to 1000 records only from the site table in HTML format. }
+\\In addition to generating the correct API response, GPT explains the logic behind its code generation. We can build similar plugins to facilitate mesh generation in FE analysis or structural health monitoring by remotely controlling drones through natural language.
+\subsection{Reasoning with a train of thought}
+Can we make GPT do geotechnical analyses? \citet{wei2022chain} showed that instead of finetuning a separate language model for each new task, it is possible to just "prompt" the model with a handful of input-output examples to demonstrate the task. Let us now consider if we can provide examples to GPT to classify fine-grained soils based on liquid and plastic limits.
+\\\\
+\textit{\textcolor{orange}{Prompt: Using soil classification of fine-grained soils as CL, CH, ML, or MH, classify the following soil with a Liquid Limit of 30, Plastic Limit of 10. }}
+\\\\
+\textcolor{blue}{\textit{Response}: In this case, PI = LL - PL = 30 - 10 = 20. Since the PI of the given soil is 20, it falls into the category of High Plasticity Soil. Therefore, the soil can be classified as either CH (High Plasticity Clay) or MH (High Plasticity Silt) based on visual and textural characteristics.}
+\\GPT incorrectly classifies the soil as CH or MH when the liquid limit is less than 50\%. How can we build a reasoning engine that understands the underlying logic? We explore how reasoning abilities emerge naturally in large language models via a simple method called chain-of-thought prompting. Imagine solving a geotechnical engineering problem, like calculating the number of trucks needed to construct an embankment. We typically break down the problem into smaller steps and solve each before arriving at the final answer: "If the embankment requires 500 cubic meters of soil and each truck carries 25 cubic meters, we need 20 trucks... then, considering a 10\% compaction loss, we need an additional two trucks... so the total number of trucks required is 22." We show how to provide language models to classify soils with a similar thought process—a coherent series of intermediate reasoning steps leading to the answer. 
+\\\\
+\textit{\textcolor{orange}{Prompt: Context: Fine-grained soil classes (``CL," ``CH," ``ML, ``MH")
+\\Q: What is the classification of fine-grained soil with a LL = 60 and a PL = 50? 
+\\A: LL boundary of 50 classifies if it is ``L" low plastic or ``H" high plastic. LL = 60 \textgreater 50, so ``H". PI = LL - PL = 60 - 50 = 10. Check if PI is above A-line: If PI \textgreater 0.73 * (LL - 20) = 10 \textgreater 0.73 * (60 - 20), if it is above the A-line, it is ``C" for clay, else ``M" for silt. It is not so ``M" silt. Soil is ``MH." 
+\\Q: What is the classification of fine-grained soil with a LL = 30 and PL = 10?
+}}
+\\\\
+\textcolor{blue}{\textit{Response A:}LL boundary of 50 classifies if it is ``L" low plastic or ``H" high plastic. LL = 30 \textless 50, so ``L". PI = liquid limit - plastic limit = 30 - 10 = 20. Check if PI is above A-line: If PI \textgreater 0.73 * (LL - 20) = 20 \textgreater 0.73 * (30 - 20). It is above the A-line, so ``C" clay. So the soil is ``CL."}
+\\\\GPT now correctly classifies the soils as low-plastic clay, following a similar reasoning process. The train-of-thought prompting provides a reasoning ability to GPT and facilitates knowledge discovery. 
+\subsection{The future of geotechnical engineering with LLMs}
+LLMs, like GPT, offer numerous benefits to geotechnical engineering. Open-source LLMs, like LlaMA (\cite{touvron2023llama}) and Alpaca, require less computational power and democratize LLM access. However, it is crucial to develop context-specific models to maximize the potential of LLMs. This process involves accessing relevant data and constructing specialized interfaces tailored to the unique requirements of the field. While GPT can serve as an effective reasoning engine, it is essential to remember that context plays a significant role in its performance. Additionally, GPT has the potential to become a natural interface for completing complex tasks, such as data analysis and design. By integrating GPT into geotechnical engineering workflows, professionals can streamline their work and make informed decisions more efficiently, developing sustainable and resilient infrastructure systems of the future.
+\section*{Acknowledgments}
+I thank Prof. Ellen Rathje for her insightful comments and discussions in writing the article. 
+\clearpage
+\printbibliography
+\end{document}
