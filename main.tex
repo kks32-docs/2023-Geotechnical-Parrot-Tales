@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage{graphicx}% Required for inserting images
 \usepackage[dvipsnames]{xcolor}
 \usepackage{geometry}
@@ -18,6 +18,8 @@ style=authoryear
 \usepackage{siunitx}
 \geometry{a4paper,margin=1 in}
 \addbibresource{main.bib}
+\usepackage{setspace}
+\usepackage{lineno}
 
 \title{Geotechnical Parrot Tales (GPT): Harnessing Large Language Models in geotechnical engineering}
 
@@ -27,6 +29,9 @@ style=authoryear
 \begin{document}
 
 \maketitle
+
+\doublespacing
+\linenumbers
 
 \section{Introduction}
 The rise of large language models (LLMs) has generated widespread interest due to their ability to answer questions, generate text/code, and summarize. One of the most popular LLM is OpenAI's ChatGPT, released in November 2022. ChatGPT is a probabilistic LLM built on OpenAI's GPT-3.5 (Generative Pretrained Transformers) with a chat user interface to the GPT model. Despite their impressive capabilities, ChatGPT can produce plausible-sounding but false outputs, blurring the line between facts and hallucinations~\parencite{bender2021dangers}.
